@@ -8,4 +8,4 @@ class EnigmaMachine:
 
     def cipher_letter(self, letter):
         print(f'Se entró al cifrado, {letter}')
-        return
+        return letter
