@@ -6,8 +6,6 @@ class EnigmaMachine:
         self.reflector = ref
         self.plugboard = pb
 
-    def encrypt(self, msg):
-        return
-
-    def decrypt(self, msg):
+    def cipher_letter(self, letter):
+        print(f'Se entró al cifrado, {letter}')
         return
