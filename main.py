@@ -6,9 +6,9 @@ from settings import *
 print('*** ENIGMA ENCRYPTION MACHINE ***\n')
 
 # Asking for initial settings
-first_rotor = int(input('First rotor? [0-4]: '))
-second_rotor = int(input('Second rotor? [0-4]: '))
-third_rotor = int(input('Third rotor? [0-4]: '))
+first_rotor = int(input('Rotor 1 wiring [0-4]: '))
+second_rotor = int(input('Rotor 2 wiring [0-4]: '))
+third_rotor = int(input('Rotor 3 wiring [0-4]: '))
 
 init_pos_r1 = int(input('\nFirst rotor initial position [0-25]: '))
 init_pos_r2 = int(input('Second rotor initial position [0-25]: '))
@@ -25,21 +25,20 @@ r1 = Rotor(init_pos_r1, ROTOR_WIRINGS[first_rotor], ROTOR_NOTCHES[first_rotor])
 r2 = Rotor(
     init_pos_r2, ROTOR_WIRINGS[second_rotor], ROTOR_NOTCHES[second_rotor])
 r3 = Rotor(init_pos_r3, ROTOR_WIRINGS[third_rotor], ROTOR_NOTCHES[third_rotor])
+ref = Rotor(0, UKW_WIRINGS[ukw], '')
 
-enigma_machine = EnigmaMachine(r1, r2, r3, UKW_WIRINGS[ukw], plugboard)
+machine = EnigmaMachine(r1, r2, r3, ref, plugboard)
 
 # Ciphering
-# original_msg = str(input('\nEnter your message: ')).upper()
-# encrypted_msg = ''
+original_msg = str(input('\nEnter your message: ')).upper()
+encrypted_msg = ''
 
-# for letter in original_msg:
-#     new_letter = enigma_machine.cipher_letter(letter)
-#     encrypted_msg = encrypted_msg + new_letter
+for char in original_msg:
+    if char in ALPHABET:
+        new_char = machine.cipher_letter(char)
+    else:
+        new_char = char
+    encrypted_msg = encrypted_msg + new_char
 
-# print(f'Original text: {original_msg}')
-# print(f'Encrypted text: {encrypted_msg}')
-
-
-# Cifrando una letra
-letra = input('Igrese letra: ').upper()
-letra = plugboard.map_letter(letra)
+print(f'Original text: {original_msg}')
+print(f'Encrypted text: {encrypted_msg}')
