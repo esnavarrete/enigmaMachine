@@ -1,5 +1,6 @@
 from bidict import bidict
 
+
 class Plugboard:
 
     def __init__(self, connections) -> None:
@@ -29,5 +30,18 @@ class Plugboard:
             new_letter = self.connections[letter]
         elif letter in self.connections.values():
             new_letter = self.connections.inverse[letter]
+        else:
+            new_letter = letter
 
         return new_letter
+
+
+# Testing the plugboard
+if __name__ == '__main__':
+
+    connections = {'A': 'B', 'X': 'Y', 'R': 'T'}
+    pb = Plugboard(connections)
+    letra = 'Y'
+
+    print(f'Las conexiones son: {pb.connections}')
+    print(f'Mapeo: {letra} -> {pb.map_letter(letra)}')
