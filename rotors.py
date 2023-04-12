@@ -31,9 +31,10 @@ class Rotor:
             letter_position + self.position) % len(ALPHABET)]
         return new_letter
 
-    def rotate(self):
+    def rotate(self) -> None:
         """
-        Just rotates the rotor by one position.
+        Just rotates the rotor by one position. It takes into 
+        account when the position exceeds the value 25.
         """
         self.position = (self.position + 1) % len(ALPHABET)
         return
