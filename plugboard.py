@@ -1,17 +1,20 @@
+from bidict import bidict
+
 class Plugboard:
 
-    def __init__(self, settings) -> None:
+    def __init__(self, connections) -> None:
         '''
             Args:
                 - settings: A dictionary containing all the plugged pairs of letters in
-                    plugboard. Dict keys are the initial letters and dict values are the 
-                    corresponding mapped letter. For example, if we want the 
+                    plugboard. For example, if we want the 
                     following connections in plugboard: A-B, X-Y and R-T, 
-                    the dictionary will look like this:
+                    the dictionary will be something like this:
 
-                    settings = {'A': 'B', 'X': 'Y', 'R': 'T'}
+                    connections = {'A': 'B', 'X': 'Y', 'R': 'T'}
+
+                    Then, the attribute 'connections' will be a bidict containing also the inverse mappings.
         '''
-        self.settings = settings
+        self.connections = bidict(connections)
 
     def map_letter(self, letter) -> str:
         '''
@@ -22,9 +25,9 @@ class Plugboard:
             Returns:
                 - new_letter: the resulting letter from the mapping.
         '''
-        if letter in self.settings.keys():
-            new_letter = self.settings[letter]
-        else:
-            new_letter = letter
+        if letter in self.connections.keys():
+            new_letter = self.connections[letter]
+        elif letter in self.connections.values():
+            new_letter = self.connections.inverse[letter]
 
         return new_letter
