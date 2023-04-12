@@ -1,7 +1,7 @@
 # Rotor settings are their inner wirings
 # They also include the reflector wiring
 
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 ROTOR_WIRINGS = ["EKMFLGDQVZNTOWYHXUSPAIBRCJ",  # I
                  "AJDKSIRUXBLHWTMCQGZNPYFVOE",  # II
@@ -11,6 +11,7 @@ ROTOR_WIRINGS = ["EKMFLGDQVZNTOWYHXUSPAIBRCJ",  # I
 
 ROTOR_NOTCHES = ["Y", "M", "D", "R", "H"]
 
+# UKW is the Reflector
 UKW_WIRINGS = ["EJMZALYXVBWFCRQUONTSPIKHGD",  # A
                "YRUHQSLDPXNGOKMIEBFZCWVJAT",  # B
                "FVPJIAOYEDRZXWGCTKUQSBNMHL"]  # C
