@@ -6,7 +6,7 @@ class Plugboard:
     def __init__(self, connections) -> None:
         '''
             Args:
-                - settings: A dictionary containing all the plugged pairs of letters in
+                - connections: A dictionary containing all the plugged pairs of letters in
                     plugboard. For example, if we want the 
                     following connections in plugboard: A-B, X-Y and R-T, 
                     the dictionary will be something like this:
