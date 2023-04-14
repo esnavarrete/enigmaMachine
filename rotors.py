@@ -16,7 +16,7 @@ class Rotor:
         self.wiring = wiring
         self.notch = notch
 
-    def map_letter(self, letter) -> str:
+    def map_forward(self, letter) -> str:
         """
         This function maps a letter through the rotor according to
         its wiring configuration
@@ -31,6 +31,16 @@ class Rotor:
             letter_position + self.position) % len(ALPHABET)]
         return new_letter
 
+    def map_backward(self, letter) -> str:
+        letter_position = ALPHABET.index(letter)
+        # (self.wiring.index(ALPHABET[(letter_position + self.position) % len(ALPHABET)]) - self.position) % len(ALPHABET)
+
+        new_letter = ALPHABET[(self.wiring.index(ALPHABET[(
+            letter_position + self.position) % len(ALPHABET)]) - self.position) % len(ALPHABET)]
+        # letter_position = (self.wiring.index(letter) - self.position) % len(ALPHABET)
+        # new_letter = ALPHABET[letter_position]
+        return new_letter
+
     def rotate(self) -> None:
         """
         Just rotates the rotor by one position. It takes into 
@@ -38,6 +48,16 @@ class Rotor:
         """
         self.position = (self.position + 1) % len(ALPHABET)
         return
+
+
+class UKW:
+    def __init__(self, wiring) -> None:
+        self.wiring = wiring
+
+    def reflect(self, letter) -> str:
+        letter_position = ALPHABET.index(letter)
+        new_letter = self.wiring[letter_position]
+        return new_letter
 
 
 # Testing if the class works

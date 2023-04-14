@@ -1,4 +1,4 @@
-from rotors import Rotor
+from rotors import Rotor, UKW
 from plugboard import Plugboard
 from machine import EnigmaMachine
 from settings import *
@@ -20,14 +20,16 @@ plugged_pairs = {pair[0]: pair[1]
 
 
 # Initializing the machine
-plugboard = Plugboard(plugged_pairs)
+pb = Plugboard(plugged_pairs)
+
 r1 = Rotor(init_pos_r1, ROTOR_WIRINGS[first_rotor], ROTOR_NOTCHES[first_rotor])
 r2 = Rotor(
     init_pos_r2, ROTOR_WIRINGS[second_rotor], ROTOR_NOTCHES[second_rotor])
 r3 = Rotor(init_pos_r3, ROTOR_WIRINGS[third_rotor], ROTOR_NOTCHES[third_rotor])
-ref = Rotor(0, UKW_WIRINGS[ukw], '')
 
-machine = EnigmaMachine(r1, r2, r3, ref, plugboard)
+ref = UKW(UKW_WIRINGS[ukw])
+
+machine = EnigmaMachine(r1, r2, r3, ref, pb)
 
 # Ciphering
 original_msg = str(input('\nEnter your message: ')).upper()

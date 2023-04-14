@@ -1,6 +1,17 @@
 from settings import ALPHABET
 
 
+class Converter:
+
+    def letter_to_pos(self, letter) -> int:
+        position = ALPHABET.index(letter)
+        return position
+
+    def pos_to_letter(self, position) -> str:
+        letter = ALPHABET[position]
+        return letter
+
+
 class EnigmaMachine:
     def __init__(self, r1, r2, r3, ref, pb) -> None:
         # Rotor instances:
@@ -16,42 +27,40 @@ class EnigmaMachine:
         """
         Function to cipher a letter via the Enigma Machine. The 
         ciphering process goes through the following steps: 
+            0) Rotation of the corresponding rotors
             1) Plugboard
             2) Rotors: R1 -> R2 -> R3
             3) Reflector (UKW)
             4) Rotors: R3 -> R2 -> R1
             5) Plugboard
-            6) Rotation of the corresponding rotors
         """
-        print(f'Se entró al cifrado. Input: {letter}')
+        # Step 0
+        # notch_position_1 = ALPHABET.index(self.rotor1.notch)
+        # notch_position_2 = ALPHABET.index(self.rotor2.notch)
+        self.rotor1.rotate()
+        # if self.rotor1.position == notch_position_1:
+        #     self.rotor2.rotate()
+        # if self.rotor2.position == notch_position_2:
+        #     self.rotor3.rotate()
+
         # Step 1
         new_letter = self.plugboard.map_letter(letter)
 
         # Step 2
-        new_letter = self.rotor1.map_letter(new_letter)
-        new_letter = self.rotor2.map_letter(new_letter)
-        new_letter = self.rotor3.map_letter(new_letter)
+        new_letter = self.rotor1.map_forward(new_letter)
+        new_letter = self.rotor2.map_forward(new_letter)
+        new_letter = self.rotor3.map_forward(new_letter)
 
         # Step 3
-        new_letter = self.reflector.map_letter(new_letter)
+        new_letter = self.reflector.reflect(new_letter)
 
         # Step 4
-        new_letter = self.rotor3.map_letter(new_letter)
-        new_letter = self.rotor2.map_letter(new_letter)
-        new_letter = self.rotor1.map_letter(new_letter)
+        new_letter = self.rotor3.map_backward(new_letter)
+        new_letter = self.rotor2.map_backward(new_letter)
+        new_letter = self.rotor1.map_backward(new_letter)
 
         # Step 5
         new_letter = self.plugboard.map_letter(new_letter)
-
-        # Step 6
-        notch_position_1 = ALPHABET.index(self.rotor1.notch)
-        notch_position_2 = ALPHABET.index(self.rotor2.notch)
-
-        self.rotor1.rotate()
-        if self.rotor1.position == notch_position_1:
-            self.rotor2.rotate()
-        if self.rotor2.position == notch_position_2:
-            self.rotor3.rotate()
 
         return new_letter
 
